@@ -1,0 +1,43 @@
+<div class="row justify-content-md-center" style="margin-top: 0;">
+    <div class="col-md-4 m-auto">
+
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+<div class="container mt-5 pl-5">
+    <h2 class="text-center">Create an account</h2>
+        <form method="POST" action="/login/register">
+            {{#if signupErr}}
+            <div class="form-group">
+                <label for="AlreadyExists">{{signupErr}}</label>
+            </div>
+            {{/if}}
+            <div class="form-group">
+                <label for="firstnameInput">First Name</label>
+                <input name="firstname" type="text" class="form-control" id="firstnameInput" placeholder="Enter first name">
+            </div>
+
+            <div class="form-group">
+                <label for="lastnameInput">Last Name</label>
+                <input name="lastname" type="text" class="form-control" id="lastnameInput" placeholder="Enter last name">
+            </div>
+
+            <div class="form-group">
+                <label for="emailInput">Email address</label>
+                <input name="email" type="email" class="form-control" id="emailInput" placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="passwordInput">Password</label>
+                <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password">
+            </div>
+
+            
+            <a href="/login">Already Have an account?</a>
+            <button type="submit" class="btn btn-primary float-right">SignUp</button>
+        </form>
+        </div>
+    </div>
+</div>

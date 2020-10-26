@@ -1,0 +1,32 @@
+{
+  "name": "ecommerce",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-fileupload": "^1.2.0",
+    "express-handlebars": "^5.1.0",
+    "express-session": "^1.17.1",
+    "fileupload": "^1.0.0",
+    "handlebars-helpers": "^0.10.0",
+    "hbs": "^4.1.1",
+    "http-errors": "~1.6.3",
+    "just-handlebars-helpers": "^1.0.18",
+    "mongodb": "^3.6.2",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.4",
+    "promise": "^8.1.0",
+    "razorpay": "^2.0.6"
+  },
+  "devDependencies": {
+    "assemble": "^0.24.3"
+  }
+}

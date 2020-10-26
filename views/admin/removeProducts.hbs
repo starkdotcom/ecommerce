@@ -1,0 +1,37 @@
+<div class="container-fluid">
+<table class="mt-3 col-10 table table-striped table-dark">
+   <form class="form-horizontal" action="/admin/removeProducts" method="POST"></form>
+  <thead>
+    <tr>
+         <th scope="col">Select</th>
+      <th scope="col">SlNo.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+  <form class="form-horizontal" action="/admin/removeProducts" method="POST">
+      {{#each products}}
+    <tr>
+   
+   <td style="width: 0.1rem;"><div class="form-check">
+     <input type="hidden", name="check", value=0 >
+        <input type="checkbox" class="form-check-input" name="a" value="{{this._id}}",checked="checked" >
+      
+    </div></td> 
+    
+      <td style="width: 0.5rem;">{{@index}}</td>
+      <td style="width: 11rem;">{{this.name}}</td>
+      <td style="width: 43.5rem;">{{this.description}}</this></td>
+      <td style="width: 8rem;"><img style="width: 2.5rem; height:3rem;" src="/productImages/{{this._id}}.png"></td>
+    </tr>
+    {{/each}}
+    
+  </tbody>
+  <tfoot>
+    <tr><td style="width: 2rem;"><button type="submit" class="btn btn-danger">Delete</button></td></tr>
+  </tfoot>
+   </form>
+</table>
+</div>

@@ -1,0 +1,78 @@
+<form id="checkoutForm" method="POST" action="/placeOrder">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <div class="container mt-5">
+        <h2 class="text-center">Address</h2>
+        <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+        <input type="text" name="address" class="form-control" id="autocomplete" placeholder="Address">
+
+        <input type="text" name="city" class="form-control" id="inputCity" placeholder="City">
+
+        <input type="text" name="state" class="form-control" id="inputState" placeholder="State">
+
+        <input type="tel" name="zip" class="form-control" id="inputZip" placeholder="Pin Code" pattern="[1-9]{1}[0-9]{5}"  maxlength="6">
+
+        <input type="text" name="country" class="form-control" id="inputCountry" placeholder="Country">
+       <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="Phone" pattern="[1-9]{1}[0-9]{9}" maxlength="10">
+
+        <input type="text" name="userId" id="userId" value="{{user._id}}" hidden>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <div class="container mt-5 ml-5 p-5 checkout" style="border: 1px solid white" ;>
+        <h3>Total Amount: Rs.<span id="total">{{total}}</span></h3>
+        <div class="payment">
+          <h4>Payment Method</h4>
+          <label for="COD" class="radio-inline"><input type="radio" name="paymentMethod" value="COD" checked>
+            COD</label>
+          <label for="Online Payment" class="radio-inline mt-2"><input type="radio" name="paymentMethod" value="online">
+            Online Payment</label>
+          <button class="btn btn-primary float-right" onclick="placeOrder()" type="submit">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<style>
+  input,
+  label {
+    margin: 5px 5px;
+  }
+
+  .form-group {
+    margin: 30px;
+    width: 450px;
+  }
+
+  .form-control {
+    float: left;
+  }
+
+  #autocomplete,
+  #name {
+    width: 96%;
+  }
+
+  #inputCity,#inputPhone {
+    width: 49%;
+  }
+
+  #inputZip {
+    width: 45%;
+  }
+
+  #inputState {
+    width: 45%;
+  }
+
+  #inputCountry {
+    width: 49%;
+  }
+</style>
+
+<script>
+
+</script>

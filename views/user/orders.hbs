@@ -1,0 +1,113 @@
+<style>
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .btn.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: rgb(182, 7, 7);
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div class="row">
+
+    <div class="col-md-10">
+      <div class="container-fluid">
+        <div class="table-responsive" style="overflow-x:auto;">
+        <table class="table table-hover table-striped table-dark m-2">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Date</th>
+              <th scope="col">Address</th>
+              <th scope="col">Products</th>
+              <th scope="col">Total</th>
+              <th scope="col">Mode of Payment</th>
+              <th scope="col">Status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orders }}
+
+            <tr id="{{this._id}}">
+
+              <th scope="row"></th>
+              <td>{{this.date}}</td>
+
+              <td>
+                {{this.deliveryDetais.address}},<br>{{this.deliveryDetais.city}},<br>{{this.deliveryDetais.state}},<br>{{this.deliveryDetais.pincode}},<br>PhNo.{{this.deliveryDetais.mobile}}
+              </td>
+              <td>
+                {{#each this.products}}
+
+                <span> <img class="" style="width: 5rem; height:7rem; position:absolute;" src="/productImages/{{this.item}}.png"></img></span>{{/each}}</td>
+              <td>Rs.{{this.total}}.00</td>
+              <td>{{this.paymentMethod}}</td>
+              <td>{{this.status}}</td>
+              <td> <button id="myBtn" onclick="viewOrderedProd('{{this._id}}','{{this.userId}}')"
+                  class="btn btn-primary">View Products</button></td>
+              </td>
+            </tr>
+            {{/each}}
+
+          </tbody>
+
+        </table></div>
+        <hr>
+        <div class=" float-right mr-5 pr-5 mt-3">
+        </div>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="btn close" style="float: right; margin:0;margin-left:auto">&times;</span>
+            <p id="cont"></p>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+</div>
