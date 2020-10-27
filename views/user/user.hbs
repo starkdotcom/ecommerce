@@ -1,24 +1,23 @@
 <div class="row m-3">
-{{#each products}}
-<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-<div class="card " style="max-width:100%;height:auto;"">
-  
-  <img class="card-img" style="padding:12px 10px;  height:16rem;"  src="/productImages/{{this._id}}.png" alt="Card image cap">
-  <div class="card-body" style=" height:7rem">
-    <h5 class="card-title">{{this.name}}</h5>
-    <p class="card-text">{{this.description}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-     <li class="list-group-item">Price: {{this.price}}</li>
-    <!li class="list-group-item"><!/li>
-   
-  </ul>
-  <div class="card-body">
-  <a class="card-link"></a>
-   <button onclick="addToCart('{{this._id}}')" class="card-link btn btn-light"> Add to Cart</button>
+  {{#each products}}
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+    <div class="card " style="max-width:100%;max-height:100%;">
+      <img class="card-img" style="padding:7px 10px;  height:14rem;" src="/productImages/{{this._id}}.png"
+        alt="Card image cap">
+      <div class="card-body" style=" height:auto;">
+        <h5 class="card-title">{{this.name}}</h5>
+        <p class="card-text">{{this.description}}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price: {{this.price}}</li>
+       
+        <li class="list-group-item pl-0 pr-0" >
+          <button onclick="addToCart('{{this._id}}')" class="text-primary float-left"><i class="fa fa-cart-plus p-1" aria-hidden="true"></i> Add to Cart</button>
+          <button onclick="addToCart('{{this._id}}')" class="text-primary float-right"> Buy Now</button>
+        </li>
+         </ul>
+      </div>
+      </div>
   </div>
-</div>
-</div>
-{{/each}}
-   
+    {{/each}}
+
   </div>

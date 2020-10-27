@@ -1,15 +1,15 @@
-
+//const { response } = require("express")
 	const togglePassword = document.getElementById('togglePassword');
 	const password = document.getElementById('password');
-/*
+if(togglePassword){
 	togglePassword.addEventListener('click', (e) => {
 		// toggle the type attribute
 		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
 		password.setAttribute('type', type);
 		// toggle the eye slash icon
 		togglePassword.classList.toggle('zmdi-eye-off');
-	});*/
-
+	});
+}
 (function ($) {
     "use strict";
 

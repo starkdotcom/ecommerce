@@ -6,7 +6,7 @@ var productHelpers = require('../helpers/productHelpers');
 const userHelpers = require('../helpers/userHelpers');
 
 const verifyLogin=(req,res,next)=>{
-  if(req.session.loggedIn){
+  if(req.session.userLoggedIn){
     next()
   }
   else{
@@ -20,7 +20,8 @@ router.get('/',async function(req, res, next) {
   if(user){
   userHelpers.getCartCount(user._id).then((response)=>{
     cartCount=response
-    resolve()
+  }).catch(()=>{
+    cartCount=0
   })
   }
   productHelpers.getAllProducts().then((products)=>{
@@ -71,7 +72,8 @@ router.post('/placeOrder',async(req,res)=>{
     else{   
       console.log(order);
       userHelpers.generateRazorpay(order).then((response)=>{
-      res.json(response)})
+      
+        res.json(response)})
     }
   })
   //res.render('user/orders')

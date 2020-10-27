@@ -63,9 +63,12 @@ function placeOrder() {
     })
 }
 function razorPayment(order) {
+  //  let total=order.total*100
+   // console.log(total);
+    console.log(order.total);
     var options = {
         "key": "rzp_test_P5OE1d50cFS40Q", // Enter the Key ID generated from the Dashboard
-        "amount": "order.total" + "00", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "amount": order.total, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
         "name": "Krishnanunni Sunil",
         "description": "Test Transaction",

@@ -167,7 +167,7 @@ width: 100%;
   font-size: 18px;
 }
 
-.btnsty {
+a.btnsty {
   border: none;
   outline: 0;
   display: inline-block;
@@ -180,21 +180,23 @@ width: 100%;
   font-size: 18px;
 }
 
-a.btnsty {
-  color: white;
+a.btn.btnsty {
+
   text-decoration: none;
   font-size: 22px;
 
 }
 
 .btnsty:hover, a.btnsty:hover {
-  opacity: 0.7;
+  color:black;
+  background-color: rgb(250, 242, 233);
+  opacity: 0.9;
 }
 </style>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-danger">
   <a class="navbar-brand" href="/">
-    <h1>Amazon.in</h1>
+    <h1><i class="fa fa-amazon" aria-hidden="true"></i> Amazon.in</h1>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -207,7 +209,7 @@ a.btnsty {
         <a class="nav-link" href="/">Products</a>
       </li>
       <li class="nav-item active btn p-0 pl-2 pr-2">
-        <a class="nav-link" href="/cart">Cart<span class="badge badge-success" id="cartCount">{{#if user}}{{cartCount}}{{/if}}</span></a>
+        <a class="nav-link" href="/cart">Cart <i class="fa fa-shopping-cart pr-1" aria-hidden="true"></i><span class="badge badge-success" id="cartCount">{{#if user}}{{cartCount}}{{/if}}</span></a>
       </li>
       {{#if user}}
       <li class="nav-item active btn p-0 pl-2 pr-2">
@@ -217,29 +219,28 @@ a.btnsty {
     </ul>
     {{#if user}}
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active btn btn-danger m-0 p-0">
+      <li class="nav-item active btn btn-danger  p-0">
         <div class="dropdown text-light bg-danger">
-          <button id="user" class="btn btn-danger dropdown-toggle nav-link p-2"  type="button" id="dropdownMenuButton"
+          <button id="user" class="btn btn-danger dropdown-toggle nav-link p-2 m-auto"  type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="m-auto cba abc"
-                style="width:1.5rem; height:1.5rem; border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
+            <img class="m-auto" style="width:1.5rem; height:1.5rem; border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
                 {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap"> {{user.firstname}}
           </button>
-          <div class="dropdown-menu dropdown-menu-right cba abc p-0 m-0" aria-labelledby="dropdownMenuButton">
-            <div class="card  dropdown-item m-auto cba abc" style="padding:0rem; width:17rem; height:21rem;">
+          <div class="dropdown-menu dropdown-menu-right p-0 m-0" aria-labelledby="dropdownMenuButton">
+            <div class="card  dropdown-item m-auto" style="padding:0rem; width:15rem; height:auto;">
 
-              <img class="card-img dropdown-item m-auto cba abc"
-                style="width:15.3rem; height:13rem; border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
+              <img class="card-img dropdown-item m-auto"
+                style="border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
                 {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap">
-              <div class="card-body dropdown-item text-center cba abc" style=" height:7rem">
-                <h5 class="card-title dropdown-item text-center cba abc">{{user.firstname}} {{user.lastname}}
+              <div class="card-body dropdown-item text-center" style=" height:7rem">
+                <h5 class="card-title dropdown-item text-center">{{user.firstname}} {{user.lastname}}
                 </h5>
-                <p class="card-text dropdown-item text-center cba abc">{{user.email}}</p>
+                <p class="card-text dropdown-item text-center">{{user.email}}</p>
               </div>
             </div>
 
-            <a class="dropdown-item cba abc " href="#">Manage your Account</a>
-            <a class="dropdown-item btn btn-light cba abc btnsty" href="/login/signout">Log Out</a>
+            <a class="dropdown-item text-center" href="#">Manage your Account</a>
+            <a class="dropdown-item btn btnsty" href="/login/signout">Log Out</a>
           </div>
         </div>
       </li>
@@ -249,10 +250,10 @@ a.btnsty {
     <!div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav ml-auto my-auto text-white bg-danger">
         <li class="nav-item active">
-          <a class="nav-link" href="/login">Log in </a>
+          <a class="nav-link" href="/login">Log in <i class="fa fa-sign-in" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item active">
-          <a id="signup" class="nav-link" href="/login/register">Create an account</a>
+          <a id="signup" class="nav-link" href="/login/register">Create an account <i class="fa fa-user-plus" aria-hidden="true"></i></a>
         </li>
       </ul>
     <!/div>

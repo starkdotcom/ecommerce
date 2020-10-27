@@ -226,13 +226,19 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             var userCart = await db.get().collection(collection.CART_COLLECTION).findOne({ user: ObjectID(userId) })
 
-            var cnt;
-            if (userCart) {
-                cnt = userCart.products.length
-            }
-            resolve(cnt)
 
-        })
+
+//****Must be REPLACED*****    should use db functions instead of below forEach loop
+            
+            if (userCart) {
+                var cnt=0;
+                //console.log(userCart.products);
+                userCart.products.forEach(ele => {
+                 cnt=cnt+ele.quantity    
+                });
+            resolve(cnt)}
+            else{reject()}
+          })
     },
     changeProdQuant(proId, cartId, count, quantity) {
         return new Promise((resolve, reject) => {
@@ -339,7 +345,7 @@ module.exports = {
     generateRazorpay:(orderObj)=>{
         return new Promise((resolve,reject)=>{
             var options = {
-                amount: orderObj.total,  // amount in the smallest currency unit
+                amount: orderObj.total*100,  // amount in the smallest currency unit
                 currency: "INR",
                 receipt: ""+orderObj._id
               };

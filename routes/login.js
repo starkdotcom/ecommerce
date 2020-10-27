@@ -5,7 +5,7 @@ var router = express.Router();
 const userview=require('./user')
 const userHelpers=require('../helpers/userHelpers');
 const verifyLogin=(req,res,next)=>{
-  if(req.session.loggedIn){
+  if(req.session.userLoggedIn){
     next()
   }
   else{
@@ -14,15 +14,33 @@ const verifyLogin=(req,res,next)=>{
 }
 
 router.get('/', function(req, res, next) {
-  if(req.session.loggedIn){
+  if(req.session.user){
     res.redirect('/')
   }
   else{
     res.render('account/login',{"loginErr":req.session.loginErr});
     req.session.loginErr=null;
-  }
-  });
- 
+  }})
+
+  router.post('/',(req,res,next)=>{
+    console.log(req.body);
+  userHelpers.doLogin(req.body).then((response)=>{
+    console.log(response);
+    if(response.status){
+     // response.userLoggedIn=true
+      req.session.user=response.user
+      req.session.userLoggedIn=true
+      
+      res.redirect('/')
+    }
+    else{
+      req.session.loginErr="Invalid Username or Password"
+      res.redirect('/login')
+    }
+  })
+  })
+
+  
 router.get('/register', function(req, res, next) {
     res.render('account/registration',{'signupErr':req.session.signupErr});
     req.session.signupErr=null
@@ -30,35 +48,17 @@ router.get('/register', function(req, res, next) {
 router.post('/register',function(req,res,next){
 userHelpers.doSignup(req.body).then((response,reject)=>{
 if (response){
-  req.session.loggedIn=true
   req.session.user=response
+  req.session.userLoggedIn=true
   res.redirect('/')
 }
 else {
   req.session.signupErr="Email Id already Exists";
   res.redirect('/login/register')
-}
-
-})
-})
-router.post('/',(req,res,next)=>{
-  console.log(req.body);
-userHelpers.doLogin(req.body).then((response)=>{
-  console.log(response);
-  if(response.status){
-    req.session.loggedIn=true
-    req.session.user=response.user
-    
-    res.redirect('/')
-  }
-  else{
-    req.session.loginErr="Invalid Username or Password"
-    res.redirect('/login')
-  }
-})
-})
+}})})
 router.get('/signout', function(req, res, next) {
-  req.session.destroy()
+  req.session.user=null
+  req.session.userLoggedIn=false
   res.redirect('/');
 })
   
