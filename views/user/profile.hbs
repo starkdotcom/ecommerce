@@ -1,0 +1,94 @@
+<style>
+    
+    .box {
+        border: 1px solid #140e0e;
+        border-radius: 4px;
+        padding: 0;
+        margin: 0;
+    }
+       /* background-color: #808080;
+    }*/
+
+    .boxin {
+        border-bottom: 1px solid #24191988;
+        padding: 0;
+        margin: auto;
+    }
+</style>
+<div class="container text-center">
+    <h1 class="text-center">Profile</h1>
+
+ 
+    {{#with user}}
+    <div class="container-fluid p-0"
+        style="display: block; width:70%;   border-radius: 4px;border: 1px #ddd    position: relative;">
+        
+    <div style="text-align:left; font-size: large;">Login & Security</div<br> 
+        <ul class="box">     
+            <li class="boxin">
+                <form action="/profile" method="post">
+                    <div class="row" style="">
+                        <div class="col-9 p-3 pl-5 m-0">
+                            <div class="row"><strong>Name:</strong></div>
+                            <div class="row">{{this.firstname}} {{this.lastname}}</div>
+                        </div>
+                        <div class="col-3 p-3 m-0">
+                            <span>
+                                <input class="btn btn-grey" type="submit" name="name" value="Edit">
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li class="boxin">
+                <form action="/profile" method="post">
+                   <div class="row" style="">
+                        <div class="col-9 p-3 pl-5 m-0">
+                            <div class="row"><strong>E-mail:</strong></div>
+                            <div class="row">{{this.email}} </div>
+                        </div>
+                        <div class="col-3 p-3 m-0">
+                            <span>
+                                <input class="btn btn-grey" type="submit" name="name" value="Edit">
+                            </span>
+                        </div>
+                    </div>
+                   
+                </form>
+            </li>
+            <li class="boxin">
+                <form action="/profile" method="post">
+<div class="row" style="">
+                        <div class="col-9 p-3 pl-5 m-0">
+                            <div class="row"><strong>Mobile No:</strong></div>
+                            <div class="row">{{this.mobile}} </div>
+                        </div>
+                        <div class="col-3 p-3 m-0">
+                            <span>
+                                <input class="btn btn-grey" type="submit" name="name" value="Edit">
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li class="boxin" style="border-bottom:none;">
+                <form action="/profile" method="post">
+
+           <div class="row" style="">
+                        <div class="col-9 p-3 pl-5 m-0">
+                            <div class="row"><strong>Mobile No:</strong></div>
+                            <div class="row">{{this.email}} </div>
+                        </div>
+                        <div class="col-3 p-3 m-0">
+                            <span>
+                                <input class="btn btn-grey" type="submit" name="name" value="Edit">
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    {{/with}}
+</div>

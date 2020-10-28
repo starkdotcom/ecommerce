@@ -15,7 +15,13 @@ td .mobileSmall {
  
   font-size: 12px;
 }
+td .visible-xs{
+  display: none;
+}
 @media only screen and (max-width: 420px) {
+td .visible-xs{
+  display: contents;
+}
 .hidden-xs-down{
   display: none;
 }
@@ -65,7 +71,8 @@ button{
          <button class=" cart-item-count mr-2 btn btn-primary text-light" enabled onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)"class="cart-item-count mr-3 btn btn-primary text-light ">-</button>
          
      <span class="prodCount">{{this.quantity}}</span> 
-      <button class="ml-2 btn btn-primary text-light"onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)" >+</button><div class="visible-xs mobileSmall"><button  class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></div></td>
+      <button class="ml-2 btn btn-primary text-light"onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)" >+</button>
+      <div class="visible-xs mobileSmall"><button  class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></div></td>
       <td class="price">Rs.{{multiply this.product.price this.quantity}}</td>
       <td class="hidden-xs-down"> <button  class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></td>
       </td></tr>
@@ -83,7 +90,7 @@ button{
 </div>
 {{/if}}
 <script>
-  $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+ // $(document).ready( function () {
+  //  $('#myTable').DataTable();
+//} );
 </script>

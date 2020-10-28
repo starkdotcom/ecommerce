@@ -25,9 +25,35 @@ router.get('/',async function(req, res, next) {
   })
   }
   productHelpers.getAllProducts().then((products)=>{
-    res.render('user/user', {products,user,cartCount});
+    res.render('user/home', {products,user,cartCount});
   });
 });
+router.get('/products',async function(req, res, next) {
+  let user=req.session.user
+  let cartCount=null
+  if(user){
+  userHelpers.getCartCount(user._id).then((response)=>{
+    cartCount=response
+  }).catch(()=>{
+    cartCount=0
+  })
+  }
+  productHelpers.getAllProducts().then((products)=>{
+    res.render('user/products', {products,user,cartCount});
+  })
+})
+router.get('/profile',verifyLogin,async function(req, res, next) {
+  let user=req.session.user
+  let cartCount=null
+  if(user){
+  userHelpers.getCartCount(user._id).then((response)=>{
+    cartCount=response
+  }).catch(()=>{
+    cartCount=0
+  })
+  res.render('user/profile',{user,cartCount})
+  }
+})
 router.get('/cart',verifyLogin,async function(req,res,next){
   let user=req.session.user
   let products=await userHelpers.getCartProducts(req.session.user._id)
