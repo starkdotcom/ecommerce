@@ -42,6 +42,24 @@ router.get('/products',async function(req, res, next) {
     res.render('user/products', {products,user,cartCount});
   })
 })
+router.get('/product/:id',async(req,res)=>{
+  let id=req.params.id
+  console.log(id);
+  let prod=await userHelpers.getProductDetails(id).then((response)=>{
+    console.log(response.product);
+    res.render('user/product',{product:response.product})
+  })
+
+})
+router.get('/addToWishList/:id',verifyLogin,async(req,res)=>{
+let proId=req.params.id
+let userId=req.session.user._id 
+  console.log("Api Calll")
+  userHelpers.addToWishList(proId,userId).then((stat)=>{
+  response.stat=stat
+  console.log(response.stat);
+    res.json(response)
+  })})
 router.get('/profile',verifyLogin,async function(req, res, next) {
   let user=req.session.user
   let cartCount=null
@@ -52,8 +70,16 @@ router.get('/profile',verifyLogin,async function(req, res, next) {
     cartCount=0
   })
   res.render('user/profile',{user,cartCount})
-  }
+}
 })
+router.get('/wishList',verifyLogin,async function(req, res, next) {
+  let user=req.session.user
+  let list =await userHelpers.getUserWishList(user._id)
+  console.log(list);
+  res.render('user/wishList',{user,list})
+  
+})
+
 router.get('/cart',verifyLogin,async function(req,res,next){
   let user=req.session.user
   let products=await userHelpers.getCartProducts(req.session.user._id)

@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     console.log(req.body);
   userHelpers.doLogin(req.body).then((response)=>{
     console.log(response);
-    if(response.status){
+    if(response.stat){
      // response.userLoggedIn=true
       req.session.user=response.user
       req.session.userLoggedIn=true
