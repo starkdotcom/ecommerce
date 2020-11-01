@@ -6,10 +6,12 @@ var productHelpers = require('../helpers/productHelpers');
 const userHelpers = require('../helpers/userHelpers');
 
 const verifyLogin=(req,res,next)=>{
+
   if(req.session.userLoggedIn){
-    next()
+    return next()
   }
   else{
+    req.session.redirectUrl = req.url;
      res.redirect('/login')
   }
 }

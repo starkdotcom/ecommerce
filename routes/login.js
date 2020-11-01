@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
   if(req.session.user){
     res.redirect('/')
   }
+ 
   else{
     res.render('account/login',{"loginErr":req.session.loginErr});
     req.session.loginErr=null;
@@ -28,10 +29,14 @@ router.get('/', function(req, res, next) {
     console.log(response);
     if(response.stat){
      // response.userLoggedIn=true
+     if (req.session.redirectUrl) {
+      redirectUrl = req.session.redirectUrl;
+      req.session.redirectUrl = null;
+    }
       req.session.user=response.user
       req.session.userLoggedIn=true
       
-      res.redirect('/')
+      res.redirect(redirectUrl)
     }
     else{
       req.session.loginErr="Invalid Username or Password"

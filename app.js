@@ -37,8 +37,8 @@ db.connect((err)=>{
 });
 app.use(session({secret:'Key',
 cookie:{maxAge:600000},
-resave: true,
-saveUninitialized: true,
+resave: false,
+saveUninitialized: false,
 store:new MongoStore({url:'mongodb://localhost:27017/shopping'}),
 
 }))

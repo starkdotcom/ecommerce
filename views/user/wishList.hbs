@@ -42,17 +42,7 @@ button{
 {{!#if list}}
 <div class="container-fluid">
 <table id="myTable" class="table table-striped table-dark mt-3">
-  <thead>
-    <tr>
-      <th class="hidden-xs-down" scope="col">SlNo.</th>
-      <th scope="col">Name</th>
 
-      <th class="hidden-xs-down" scope="col">Image</th>
-      <th scope="col">Price</th>
-     <th scope="col"></th>
-      <th class="hidden-xs-down"scope="col"></th>
-    </tr>
-  </thead>
   <tbody>
     {{#each list}}
     <tr id="{{this.product._id}}">
