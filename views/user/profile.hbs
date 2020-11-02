@@ -21,18 +21,18 @@
  
     {{#with user}}
     <div class="container-fluid p-0"
-        style="display: block; width:70%;   border-radius: 4px;border: 1px #ddd    position: relative;">
+        style="display: block; width:100%;   border-radius: 4px;border: 1px #ddd    position: relative;">
         
     <div style="text-align:left; font-size: large;">Login & Security</div<br> 
         <ul class="box">     
             <li class="boxin">
                 <form action="/profile/{{this._id}}/{{this.fisrtname}}/{{this.lastname}}" method="post">
-                    <div class="row" style="">
+                    <div class="row" style="min-width:fit-content">
                         <div class="col-9 p-3 pl-5 m-0">
-                            <div class="row"><strong>Name:</strong></div>
+                            <div class="row"><strong>Name:</strong></div>   
                             <div class="row">{{this.firstname}} {{this.lastname}}</div>
                         </div>
-                        <div class="col-3 p-3 m-0">
+                        <div class="col-3 m-auto" style="padding-right: 2rem;padding-left: 0;">
                             <span>
                                 <input class="btn btn-grey" type="submit" name="name" value="Edit">
                             </span>
@@ -47,7 +47,7 @@
                             <div class="row"><strong>E-mail:</strong></div>
                             <div class="row">{{this.email}} </div>
                         </div>
-                        <div class="col-3 p-3 m-0">
+                        <div class="col-3 m-auto" style="padding-right: 2rem;padding-left: 0;">
                             <span>
                                 <input class="btn btn-grey" type="submit" name="email" value="Edit">
                             </span>
@@ -63,7 +63,7 @@
                             <div class="row"><strong>Mobile No:</strong></div>
                             <div class="row">{{this.mobile}} </div>
                         </div>
-                        <div class="col-3 p-3 m-0">
+                        <div class="col-3 m-auto" style="padding-right: 2rem;padding-left: 0;">
                             <span>
                                 <input class="btn btn-grey" type="submit" name="mobile" value="Edit">
                             </span>
@@ -79,7 +79,7 @@
                             <div class="row"><strong>Mobile No:</strong></div>
                             <div class="row">{{this.email}} </div>
                         </div>
-                        <div class="col-3 p-3 m-0">
+                        <div class="col-3 m-auto" style="padding-right: 2rem;padding-left: 0;">
                             <span>
                                 <input class="btn btn-grey" type="submit" name="email" value="Edit">
                             </span>

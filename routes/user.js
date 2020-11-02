@@ -33,7 +33,11 @@ router.get('/',async function(req, res, next) {
 router.get('/products',async function(req, res, next) {
   let user=req.session.user
   let cartCount=null
+  let listProd
   if(user){
+    userHelpers.checkWishList(user._id).then((products)=>{
+      listProd=products
+    }).catch()
   userHelpers.getCartCount(user._id).then((response)=>{
     cartCount=response
   }).catch(()=>{
@@ -41,7 +45,7 @@ router.get('/products',async function(req, res, next) {
   })
   }
   productHelpers.getAllProducts().then((products)=>{
-    res.render('user/products', {products,user,cartCount});
+    res.render('user/products', {products,user,cartCount,listProd});
   })
 })
 router.get('/product/:id',async(req,res)=>{

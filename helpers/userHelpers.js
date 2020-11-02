@@ -290,14 +290,26 @@ module.exports = {
 
         })
     },
+    checkWishList:(userId) => {
+        return new Promise(async (resolve, reject) => {
+            var wishList = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({user:ObjectID(userId)})
+            if(wishList){
+                var proId=[]
+                wishList.products.forEach(ele => {
+                    proId.push(ele.item)    
+                   });
+                   console.log(proId);
+                resolve(proId)
+            }
+            reject()
+        })
+    },
     getCartCount: (userId) => {
         return new Promise(async (resolve, reject) => {
             var userCart = await db.get().collection(collection.CART_COLLECTION).findOne({ user: ObjectID(userId) })
-
-
-
-//****Must be REPLACED*****    should use db functions instead of below forEach loop
             
+//****Must be REPLACED*****    should use db functions instead of below forEach loop
+
             if (userCart) {
                 var cnt=0;
                 //console.log(userCart.products);

@@ -1,34 +1,25 @@
-<style>th {
+<style>
+th {
   color: #A1A1A1;
-  font-size: 12px;
   font-weight: bold;
 }
-table.dataTable tbody tr {
-     background:none; */
-}
-
-th,td {
-  font-size: 14px; 
-}
-
-td .mobileSmall {
- 
-  font-size: 12px;
-}
 td .visible-xs{
   display: none;
 }
-@media only screen and (max-width: 420px) {
-td .visible-xs{
-  display: contents;
-}
-.hidden-xs-down{
-  display: none;
-}
-th,td {
- width:100px;
-  font-size: 14px; 
-}
+@media only screen and (max-width: 768px) {
+    .visible-xs.mobileSmall {
+      display: contents;
+    }
+
+    .hidden-xs-down {
+      display: none;
+    }
+
+    table.table {
+      max-width: 500px;
+      text-align: center;
+      margin: auto;
+    }
 button{
   text-align:center ;
 }
@@ -36,8 +27,11 @@ button{
   padding:2px 8px;
   margin:1px;
 }
-}
-  
+    td {
+
+      font-size: 14px;
+    }
+  }
 </style>
 {{#if total}}
 <div class="container-fluid">
@@ -60,7 +54,7 @@ button{
     
       <td class="hidden-xs-down">{{@index}}</td>
 
-      <td>{{this.product.name}}<div class="visible-xs mobileSmall"><img style="width: 2.5rem; height:3rem;" src="/productImages/{{this.product._id}}.png"></div></td>
+      <td>{{this.product.name}}<br><div class="visible-xs mobileSmall"><img style="width: 2.5rem; height:3rem;" src="/productImages/{{this.product._id}}.png"></div></td>
       
       <td class="hidden-xs-down"><img style="width: 2.5rem; height:3rem;" src="/productImages/{{this.product._id}}.png"></td>
 
@@ -71,8 +65,8 @@ button{
          <button class=" cart-item-count mr-2 btn btn-primary text-light" enabled onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)"class="cart-item-count mr-3 btn btn-primary text-light ">-</button>
          
      <span class="prodCount">{{this.quantity}}</span> 
-      <button class="ml-2 btn btn-primary text-light"onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)" >+</button>
-      <div class="visible-xs mobileSmall"><button  class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></div></td>
+      <button class="ml-2 btn btn-primary text-light"onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)" >+</button><br>
+      <div class="visible-xs mobileSmall"><button  class="btn btn-danger mt-1" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></div></td>
       <td class="price">Rs.{{multiply this.product.price this.quantity}}</td>
       <td class="hidden-xs-down"> <button  class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.name}}') changeQuantity('{{this._id}}','{{this.product._id}}','-{{this.quantity}}')">Remove</button></td>
       </td></tr>

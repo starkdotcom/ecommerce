@@ -6,7 +6,7 @@
 
       <div class="" style="position:relative">
         <button onclick="addToWishList('{{this._id}}')"
-          style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);	color:#FFF;border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
+          style="z-index:4;	position:absolute;width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
           <i class="fa fa-heart p-1 mt-1" aria-hidden="true"></i></button>
         <button onclick="share('{{this._id}}')"
           style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:52px;	right:12px;	background-color:rgb(123, 147, 255);	color:#FFF;	border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
@@ -41,7 +41,7 @@
 <script>
 function addToWishList(proId) {
     let hh = document.getElementById(proId)
-    let h =hh.querySelector'.card div button i.fa.fa-heart'
+    let h =hh.querySelector('.card div button i.fa.fa-heart')
     $.ajax({
       url: "/addToWishList/" + proId,
       type: 'get',
