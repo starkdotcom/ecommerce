@@ -298,7 +298,6 @@ module.exports = {
                 wishList.products.forEach(ele => {
                     proId.push(ele.item)    
                    });
-                   console.log(proId);
                 resolve(proId)
             }
             reject()
@@ -388,11 +387,11 @@ module.exports = {
     },
     getProductDetails:(proId)=>{
         return new Promise(async (resolve, reject) => {
+            
             var prod=await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectID(proId)})
                 console.log(prod);
                 resolve({product:prod})
-            
-       
+        
     })},
     getUserOrders: (userId) => {
         return new Promise(async (resolve, reject) => {

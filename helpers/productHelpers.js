@@ -3,6 +3,8 @@ const fs = require('fs')
 var db = require('../config/connection')
 var collection=require('../config/collection');
 const { PRODUCT_COLLECTION } = require('../config/collection');
+var userHelpers = require('./userHelpers')
+const strcmp=require('strcmp')
 const { resolve } = require('path');
 const { ObjectId } = require('mongodb');
 module.exports={
@@ -75,9 +77,30 @@ removeProducts:(product,callback)=>
    callback();
     
 },
-getAllProducts:()=>{
+getAllProducts:(userId)=>{
     return new Promise(async (resolve,reject)=>{
         let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray();
+         if(userId){
+             console.log("user:",userId);
+            await userHelpers.checkWishList(userId).then((prod)=>{
+                //console.log(prod);
+                products.forEach(element => {
+                   element.wlist= prod.forEach(ele=>{
+                       console.log("list:",ele);
+                       console.log("Prod:",element._id);
+                       let str1=element._id
+                        return strcmp(str1,ele)/*
+                        console.log("val:",products.element.wlist);
+                        return true;
+                        }*/
+                    })
+                  console.log(element.wlist);
+                })
+                
+               // products.wlist=products.some(v =>{ prod.includes(v);
+             //   console.log(products)});
+              })/*.catch(products.wlist=false)*/}
+              console.log(products);
         resolve (products);
     })
 },

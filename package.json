@@ -24,7 +24,8 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4",
     "promise": "^8.1.0",
-    "razorpay": "^2.0.6"
+    "razorpay": "^2.0.6",
+    "strcmp": "^1.0.0"
   },
   "devDependencies": {
     "assemble": "^0.24.3"

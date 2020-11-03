@@ -1,13 +1,17 @@
 <div class="row m-3">
+     
   {{#each products}}
+<h3> S{{this.wlist}}</h3>
   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
 
     <div id="{{this._id}}" class="card " style="max-width:100%;max-height:100%;">
 
       <div class="" style="position:relative">
         <button onclick="addToWishList('{{this._id}}')"
-          style="z-index:4;	position:absolute;width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
+          style="z-index:4;	position:absolute;width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;color:white">
           <i class="fa fa-heart p-1 mt-1" aria-hidden="true"></i></button>
+          {{#each listProd}}{{#is ../this.product this }}Red{{/is}}{{/each}}
+         
         <button onclick="share('{{this._id}}')"
           style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:52px;	right:12px;	background-color:rgb(123, 147, 255);	color:#FFF;	border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
           <i class="fa fa-share p-1 mt-1" aria-hidden="true"></i></button>
@@ -18,9 +22,11 @@
         
         <div class="card-body pb-0" style=" height:auto;">
           <h5 class="card-title">{{this.name}}</h5>
+         
           <p class="card-text">{{this.description}}</p>
+        </div>
         </a>
-      </div>   <div class="card-body pt-0" style=" height:auto;">
+         <div class="card-body pt-0" style=" height:auto;">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Price: {{this.price}}</li>
 

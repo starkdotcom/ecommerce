@@ -55,6 +55,13 @@ app.use(function(req, res, next) {
 Handlebars.registerHelper("multiply", function(thing1, thing2) {
   return thing1 * thing2;
 });
+Handlebars.registerHelper('is', function(a, b, opts) {
+  if (a == b) {
+      return opts.fn(this)
+  } else {
+      return opts.inverse(this)
+  }
+})
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
