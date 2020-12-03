@@ -19,12 +19,13 @@
     <h1 class="text-center">Profile</h1>
 
  
-    {{#with user}}
+   
     <div class="container-fluid p-0"
         style="display: block; width:100%;   border-radius: 4px;border: 1px #ddd    position: relative;">
         
     <div style="text-align:left; font-size: large;">Login & Security</div<br> 
-        <ul class="box">     
+        <ul class="box">   
+             {{#with user}}  
             <li class="boxin">
                 <form action="/profile/{{this._id}}/{{this.fisrtname}}/{{this.lastname}}" method="post">
                     <div class="row" style="min-width:fit-content">
@@ -71,24 +72,40 @@
                     </div>
                 </form>
             </li>
+            {{/with}}
+<div class="boxin p-3 pl-2 m-0" style="border-bottom:none;"><strong>Address:</strong>  
+<span><a href="/profile/addAddress" class="btn btn-grey bg-white float-right mr-5"  name="addAddress" >Add Address</a>
+                            </span>    </div>
+                {{#each addr}}
             <li class="boxin" style="border-bottom:none;">
-                <form action="/profile/{{this.email}}" method="post">
-
+                <form action="/profile/updateAddress/{{@index}}" method="get">
+            
            <div class="row" style="">
+                    
+                    
                         <div class="col-9 p-3 pl-5 m-0">
-                            <div class="row"><strong>Mobile No:</strong></div>
-                            <div class="row">{{this.email}} </div>
+                            
+                        
+                            <div class="row"> {{this.name}}<br>{{this.address}},{{this.city}},{{this.state}},{{this.zip}}<br>{{this.mobile}}<hr> </div>
+                            
+                            
                         </div>
+                     
+                        
                         <div class="col-3 m-auto" style="padding-right: 2rem;padding-left: 0;">
                             <span>
-                                <input class="btn btn-grey" type="submit" name="email" value="Edit">
+                                <button class="btn btn-grey" type="submit" >Edit</button>
                             </span>
+                           <span><a href="/profile/removeAddress/{{@index}}" class="btn btn-grey bg-white"  name="removeAddress" >Remove Address</a>
+                            </span>                        
                         </div>
-                    </div>
+                       
+                    </div>       
                 </form>
             </li>
+             {{/each}}
         </ul>
     </div>
 
-    {{/with}}
+
 </div>

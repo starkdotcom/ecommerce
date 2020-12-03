@@ -1,0 +1,91 @@
+<style>
+  input,
+  label {
+    margin: 5px 5px;
+  }
+
+  .form-group {
+    width: 48%;}/*;
+    margin: 30px;
+    width: 450px;
+  }*/
+
+  .form-control {
+    float: left;
+  }
+
+  #autocomplete,
+  #name {
+    width: 96%;
+  }
+
+  #inputCity,#inputPhone {
+    width: 49%;
+  }
+
+  #inputZip {
+    width: 45%;
+  }
+
+  #inputState {
+    width: 45%;
+  }
+
+  #inputCountry {
+    width: 49%;
+  }
+  .gp1{
+    float: left;
+  }
+  .gp2{
+    float: right;
+    padding-right: 2rem;
+  }
+   .container.checkout{
+     border-radius:1.5rem;
+     background-color: #fff;
+     padding: 3rem;
+     float:right;
+     margin-top: 3rem;
+     marigin-bottom:3rem;}
+  @media only screen and (max-width: 767px) {
+    .form-group{
+      width:70%;
+    }
+   .container{ 
+     margin:auto;
+}
+  .gp1{
+    float: none;
+    margin:auto;
+  }
+  .gp2{
+    float: none;
+    margin:auto;
+    padding-right: 0;
+  }
+  }
+</style>
+
+
+<form id="checkoutForm" method="POST" action="/profile/updateAddress/{{index}}" >
+
+    <div class="form-group gp1">
+      <div class="container mt-5">
+        <h2 class="text-center">Address</h2>
+        <input type="text" name="name" class="form-control" id="name" value="{{addr.name}}">
+        <input type="text" name="address" class="form-control" id="autocomplete" value="{{addr.address}}">
+
+        <input type="text" name="city" class="form-control" id="inputCity" value="{{addr.city}}">
+
+        <input type="text" name="state" class="form-control" id="inputState" value="{{addr.state}}">
+
+        <input type="tel" name="zip" class="form-control" id="inputZip" value="{{addr.zip}}" pattern="[1-9]{1}[0-9]{5}"  maxlength="6">
+
+        <input type="text" name="country" class="form-control" id="inputCountry" value="{{addr.country}}">
+       <input type="tel" name="phone" class="form-control" id="inputPhone" value="{{addr.phone}}" pattern="[1-9]{1}[0-9]{9}" maxlength="10">
+
+        <button type="submit" class="btn btn-light"  id="submit" >Update</button>
+      </div>
+    </div>
+    </form>

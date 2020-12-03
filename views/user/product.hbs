@@ -1,5 +1,4 @@
-
-<div class="super_container">
+<div class="super_container" id="{{product._id}}">
     <header class="header" style="display: none;">
         <div class="header_main">
             <div class="container">
@@ -10,7 +9,9 @@
                                 <div class="header_search_form_container">
                                     <form action="#" class="header_search_form clearfix">
                                         <div class="custom_dropdown">
-                                            <div class="custom_dropdown_list"> <span class="custom_dropdown_placeholder clc">All Categories</span> <i class="fas fa-chevron-down"></i>
+                                            <div class="custom_dropdown_list"> <span
+                                                    class="custom_dropdown_placeholder clc">All Categories</span> <i
+                                                    class="fas fa-chevron-down"></i>
                                                 <ul class="custom_list clc">
                                                     <li><a class="clc" href="#">All Categories</a></li>
                                                 </ul>
@@ -25,24 +26,31 @@
             </div>
         </div>
     </header>
-    <div class="single_product">
+    <div class="single_product" >
         <div class="container-fluid" style=" background-color: #fff; padding: 11px;">
             <div class="row">
                 <div class="col-lg-2 order-lg-1 order-2">
                     <ul class="image_list">
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"></li>
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg" alt=""></li>
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg" alt=""></li>
+                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"><img
+                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"></li>
+                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg"><img
+                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg" alt="">
+                        </li>
+                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg"><img
+                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg" alt="">
+                        </li>
                     </ul>
                 </div>
-                <div class="col-lg-4 order-lg-2 order-1"> <div class="" style="position:relative">
-        <button onclick="addToWishList('{{this._id}}')"
-          style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);	color:#FFF;border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
-          <i class="fa fa-heart p-1 mt-1" aria-hidden="true"></i></button>
-        <button onclick="share('{{this._id}}')"
-          style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:52px;	right:12px;	background-color:rgb(123, 147, 255);	color:#FFF;	border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
-          <i class="fa fa-share p-1 mt-1" aria-hidden="true"></i></button>
-          </div>
+                <div class="col-lg-4 order-lg-2 order-1">
+                    <div class="" style="position:relative">
+                        <button onclick="addToWishList('{{product._id}}')"
+                            style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);	color:#FFF;border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
+                            <i class="fa fa-heart p-1 mt-1" {{#if wlist}}style="color:red" {{/if}}
+                                aria-hidden="true"></i></button>
+                        <button onclick="share('{{product._id}}')"
+                            style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:52px;	right:12px;	background-color:rgb(123, 147, 255);	color:#FFF;	border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
+                            <i class="fa fa-share p-1 mt-1" aria-hidden="true"></i></button>
+                    </div>
                     <div class="image_selected"><img src="/productImages/{{product._id}}.png" alt=""></div>
                 </div>
                 <div class="col-lg-6 order-3">
@@ -55,19 +63,29 @@
                             </ol>
                         </nav>
                         <div class="product_name">{{product.name}}</div>
-                        <div class="product-rating"><span class="badge badge-success"><i class="fa fa-star"></i> 4.5 Star</span> <span class="rating-review">35 Ratings & 45 Reviews</span></div>
-                        <div> <span class="product_price">₹ {{product.price}}</span> <strike class="product_discount"> <span style='color:black'><span> </strike> </div>
-                        <div> <span class="product_saved">You Saved:</span> <span style='color:black'>₹ 2,000<span> </div>
+                        <div class="product-rating"><span class="badge badge-success"><i class="fa fa-star"></i> 4.5
+                                Star</span> <span class="rating-review">35 Ratings & 45 Reviews</span></div>
+                        <div> <span class="product_price">₹ {{product.price}}</span> <strike class="product_discount">
+                                <span style='color:black'><span> </strike> </div>
+                        <div> <span class="product_saved">You Saved:</span> <span style='color:black'>₹ 2,000<span>
+                        </div>
                         <hr class="singleline">
-                        <div> <span class="product_info">EMI starts at ₹ 2,000. No Cost EMI Available<span><br> <span class="product_info">Warranty: 6 months warranty<span><br> <span class="product_info">7 Days easy return policy<span><br> <span class="product_info">7 Days easy return policy<span><br> <span class="product_info">In Stock: 25 units sold this week<span> </div>
+                        <div> <span class="product_info">EMI starts at ₹ 2,000. No Cost EMI Available<span><br> <span
+                                        class="product_info">Warranty: 6 months warranty<span><br> <span
+                                                class="product_info">7 Days easy return policy<span><br> <span
+                                                        class="product_info">7 Days easy return policy<span><br> <span
+                                                                class="product_info">In Stock: 25 units sold this
+                                                                week<span> </div>
                         <div>
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="br-dashed">
                                         <div class="row">
-                                            <div class="col-md-3 col-xs-3"> <img src="https://img.icons8.com/color/48/000000/price-tag.png"> </div>
+                                            <div class="col-md-3 col-xs-3"> <img
+                                                    src="https://img.icons8.com/color/48/000000/price-tag.png"> </div>
                                             <div class="col-md-9 col-xs-9">
-                                                <div class="pr-info"> <span class="break-all">Get 5% instant discount + 10X rewards @ RENTOPC</span> </div>
+                                                <div class="pr-info"> <span class="break-all">Get 5% instant discount +
+                                                        10X rewards @ RENTOPC</span> </div>
                                             </div>
                                         </div>
                                     </div>
@@ -75,8 +93,13 @@
                                 <div class="col-md-7"> </div>
                             </div>
                             <div class="row" style="margin-top: 15px;">
-                                <div class="col-xs-6" style="margin-left: 15px;"> <span class="product_options">RAM Options</span><br> <button class="btn btn-primary btn-sm">4 GB</button> <button class="btn btn-primary btn-sm">8 GB</button> <button class="btn btn-primary btn-sm">16 GB</button> </div>
-                                <div class="col-xs-6" style="margin-left: 55px;"> <span class="product_options">Storage Options</span><br> <button class="btn btn-primary btn-sm">500 GB</button> <button class="btn btn-primary btn-sm">1 TB</button> </div>
+                                <div class="col-xs-6" style="margin-left: 15px;"> <span class="product_options">RAM
+                                        Options</span><br> <button class="btn btn-primary btn-sm">4 GB</button> <button
+                                        class="btn btn-primary btn-sm">8 GB</button> <button
+                                        class="btn btn-primary btn-sm">16 GB</button> </div>
+                                <div class="col-xs-6" style="margin-left: 55px;"> <span class="product_options">Storage
+                                        Options</span><br> <button class="btn btn-primary btn-sm">500 GB</button>
+                                    <button class="btn btn-primary btn-sm">1 TB</button> </div>
                             </div>
                         </div>
                         <hr class="singleline">
@@ -85,15 +108,23 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-6" style="margin-left: 13px;">
-                                <div class="product_quantity"> <span>QTY: </span> <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                                <div class="product_quantity"> <span>QTY: </span> <input id="quantity_input" type="text"
+                                        pattern="[0-9]*" value="1">
                                     <div class="quantity_buttons">
-                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i
+                                                class="fa fa-chevron-up"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i
+                                                class="fa fa-chevron-down"></i></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-6"> <button type="button" class="btn btn-primary shop-button">Add to Cart</button> <button type="button" class="btn btn-success shop-button">Buy Now</button>
-                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                            <div class="col-xs-6"> <button type="button" class="btn btn-primary shop-button">Add to
+                                    Cart</button> <button type="button" class="btn btn-success shop-button">Buy
+                                    Now</button>
+                                <div class="product_fav"><button {{!#if user}}onclick="addToWishList('{{product._id}}')"{{!/if}}
+                                    style="/*z-index:4;	position:absolute;width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;*/color:white">
+                                    <i class="fa fa-heart" {{#if this.wlist}}style="color:red" {{/if}}></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,29 +139,49 @@
                     <div class="row padding-2">
                         <div class="col-md-5 padding-0">
                             <div class="bbb_combo">
-                                <div class="bbb_combo_image"><img class="bbb_combo_image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
-                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike> <span class="ml-auto"><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i></span> </div>
-                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23 Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
+                                <div class="bbb_combo_image"><img class="bbb_combo_image"
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg"
+                                        alt=""></div>
+                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span
+                                            class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike>
+                                    <span class="ml-auto"><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i></span> </div>
+                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span
+                                        style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23
+                                        Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center"> <span class="step">+</span> </div>
                         <div class="col-md-5 padding-0">
                             <div class="bbb_combo">
-                                <div class="bbb_combo_image"><img class="bbb_combo_image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
-                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike> <span class="ml-auto"><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i></span> </div>
-                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23 Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
+                                <div class="bbb_combo_image"><img class="bbb_combo_image"
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg"
+                                        alt=""></div>
+                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span
+                                            class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike>
+                                    <span class="ml-auto"><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i></span> </div>
+                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span
+                                        style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23
+                                        Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12" style="margin-left: 36px;">
                             <div class="boxo-pricing-items">
-                                <div class="combo-pricing-item"> <span class="items_text">1 Item</span> <span class="combo_item_price">₹13,200</span> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">1 Item</span> <span
+                                        class="combo_item_price">₹13,200</span> </div>
                                 <div class="combo-plus"> <span class="plus-sign">+</span> </div>
-                                <div class="combo-pricing-item"> <span class="items_text">1 Add-on</span> <span class="combo_item_price">₹500</span> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">1 Add-on</span> <span
+                                        class="combo_item_price">₹500</span> </div>
                                 <div class="combo-plus"> <span class="plus-sign">=</span> </div>
-                                <div class="combo-pricing-item"> <span class="items_text">Total</span> <span class="combo_item_price">₹13,700</span> </div>
-                                <div class="add-both-cart-button"> <button type="button" class="btn btn-primary shop-button">Add to Cart</button> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">Total</span> <span
+                                        class="combo_item_price">₹13,700</span> </div>
+                                <div class="add-both-cart-button"> <button type="button"
+                                        class="btn btn-primary shop-button">Add to Cart</button> </div>
                             </div>
                         </div>
                     </div>
@@ -140,29 +191,50 @@
                     <div class="row padding-2">
                         <div class="col-md-5 padding-0">
                             <div class="bbb_combo">
-                                <div class="bbb_combo_image"><img class="bbb_combo_image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
-                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike> <span class="ml-auto"><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating p-rating"></i><i class="fa fa-star p-rating"></i></span> </div>
-                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23 Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
+                                <div class="bbb_combo_image"><img class="bbb_combo_image"
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg"
+                                        alt=""></div>
+                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span
+                                            class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike>
+                                    <span class="ml-auto"><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating p-rating"></i><i
+                                            class="fa fa-star p-rating"></i></span> </div>
+                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span
+                                        style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23
+                                        Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center"> <span class="step">+</span> </div>
                         <div class="col-md-5 padding-0">
                             <div class="bbb_combo">
-                                <div class="bbb_combo_image"><img class="bbb_combo_image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
-                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike> <span class="ml-auto"><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i></span> </div>
-                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23 Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
+                                <div class="bbb_combo_image"><img class="bbb_combo_image"
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg"
+                                        alt=""></div>
+                                <div class="d-flex flex-row justify-content-start"> <strike style="color:red;"> <span
+                                            class="fs-10" style="color:black;">₹ 32,000<span> </span></span></strike>
+                                    <span class="ml-auto"><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i><i class="fa fa-star p-rating"></i><i
+                                            class="fa fa-star p-rating"></i></span> </div>
+                                <div class="d-flex flex-row justify-content-start" style=" margin-bottom: 13px; "> <span
+                                        style="margin-top: -4px;">₹30,000</span> <span class="ml-auto fs-10">23
+                                        Reviews</span> </div> <span>Acer laptop with 10GB RAM + 500 GB Hard Disk</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12" style="margin-left: 36px;">
                             <div class="boxo-pricing-items">
-                                <div class="combo-pricing-item"> <span class="items_text">1 Item</span> <span class="combo_item_price">₹13,200</span> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">1 Item</span> <span
+                                        class="combo_item_price">₹13,200</span> </div>
                                 <div class="combo-plus"> <span class="plus-sign">+</span> </div>
-                                <div class="combo-pricing-item"> <span class="items_text">1 Add-on</span> <span class="combo_item_price">₹500</span> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">1 Add-on</span> <span
+                                        class="combo_item_price">₹500</span> </div>
                                 <div class="combo-plus"> <span class="plus-sign">=</span> </div>
-                                <div class="combo-pricing-item"> <span class="items_text">Total</span> <span class="combo_item_price">₹13,700</span> </div>
-                                <div class="add-both-cart-button"> <button type="button" class="btn btn-primary shop-button">Add to Cart</button> </div>
+                                <div class="combo-pricing-item"> <span class="items_text">Total</span> <span
+                                        class="combo_item_price">₹13,700</span> </div>
+                                <div class="add-both-cart-button"> <button type="button"
+                                        class="btn btn-primary shop-button">Add to Cart</button> </div>
                             </div>
                         </div>
                     </div>
@@ -180,7 +252,8 @@
                                 <td class="col-md-4"><span class="p_specification">Sales Package :</span> </td>
                                 <td class="col-md-8">
                                     <ul>
-                                        <li>2 in 1 Laptop, Power Adaptor, Active Stylus Pen, User Guide, Warranty Documents</li>
+                                        <li>2 in 1 Laptop, Power Adaptor, Active Stylus Pen, User Guide, Warranty
+                                            Documents</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -233,21 +306,41 @@
 </div>
 <script>
     function addToWishList(proId) {
-    let hh = document.getElementById(proId)
-    let h =hh.querySelector'.card div button i.fa.fa-heart'
-    $.ajax({
-      url: "/addToWishList/" + proId,
-      type: 'get',
-      success: (response) => {
-        console.log(response)
-        if (response.stat) {
-          h.style.color = "red";
-        }
-        else {
-          h.style.color = "white";
-        }
-      }
-    })
-  }
+        let hh = document.getElementById(proId)
+        let h = hh.querySelector('button i.fa.fa-heart')
+        $.ajax({
+            url: "/addToWishList/" + proId,
+            type: 'get',
+            success: (response) => {
+                //console.log(response)
+                if (response.stat) {
+                    h.style.color = "red";
+                }
+                else {
+                    h.style.color = "white";
+                }
+            }
+        })
+    }
+
+    function addToWishList(proId) {
+        let hh = document.getElementById(proId)
+        let h = hh.querySelectorAll('div button i.fa.fa-heart')
+        $.ajax({
+            url: "/addToWishList/" + proId,
+            type: 'get',
+            success: (response) => {
+                console.log(response)
+                if (response.stat) {
+                    h[0].style.color = "red";
+                    h[1].style.color = "red";
+                }
+                else {
+                    h[0].style.color = "white";
+                    h[1].style.color = "grey";
+                }
+            }
+        })
+    }
 
 </script>

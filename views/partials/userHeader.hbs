@@ -3,6 +3,15 @@
   @import"https://fonts.googleapis.com/css?family=Space+Mono&display=swap";
 
 
+  .search input#search {
+    background-color: rgb(247, 248, 250);
+    border: none;
+    border-radius: 25px;
+    width: 203px;
+    height: 40px;
+    text-indent: 18px;
+    padding: 0px;
+  }
 
   nav .navbar-brand a {
     color: white;
@@ -26,14 +35,12 @@
     text-decoration: none;
     transition: transform .1s;
     cursor: pointer;
-    margin: 0 .5em 0 0;
+    margin: 0;
     line-height: 1em;
     text-align: center;
     border-radius: .28571429rem;
-
     background-repeat: no-repeat;
     background-position: -120px -120px, 0 0;
-
     background-image: -webkit-linear-gradient(top left,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0.2) 37%,
@@ -61,6 +68,7 @@
     -o-transition: background-position 0s ease;
     transition: background-position 0s ease;
   }
+
   nav .navbar-brand {
     font-family: 'Caveat', cursive;
 
@@ -70,14 +78,18 @@
     width: fit-content;
     height: fit-content;
   }
-  nav .navbar-brand:hover{
-     transform: scale(1.1);
+
+  nav .navbar-brand:hover {
+    transform: scale(1.1);
     background-position: 0 0, 0 0;
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
     transition-duration: 0.5s;
   }
-  #signup,#user {
+
+  #searchbtn,
+  #signup,
+  #user {
     box-sizing: content-box;
     border: 2px solid azure;
     border-radius: 5px;
@@ -148,49 +160,58 @@
     -moz-transition-duration: 0.5s;
     transition-duration: 0.5s;
   }
-.btn{
-  border:0px;
-  margin: auto;
 
-}
-.card {height: auto;
-width: 100%;
-  box-shadow: 0  0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  
-}
+  .btn {
+    border: 0px;
+    margin: auto;
 
-.title {
-  color: grey;
-  font-size: 18px;
-}
+  }
 
-a.btnsty {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
+  .card {
+    height: auto;
+    width: 100%;
+    box-shadow: 0 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
 
-a.btn.btnsty {
+  }
 
-  text-decoration: none;
-  font-size: 22px;
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
 
-}
+  a.btnsty {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
 
-.btnsty:hover, a.btnsty:hover {
-  color:black;
-  background-color: rgb(250, 242, 233);
-  opacity: 0.9;
+  a.btn.btnsty {
+
+    text-decoration: none;
+    font-size: 22px;
+
+  }
+
+  .btnsty:hover,
+  a.btnsty:hover {
+    color: black;
+    background-color: rgb(250, 242, 233);
+    opacity: 0.9;
+  }
+
+
+@media only screen and(max-width: 767px) {
+
 }
 </style>
 
@@ -198,10 +219,22 @@ a.btn.btnsty {
   <a class="navbar-brand" href="/">
     <h1><i class="fa fa-amazon" aria-hidden="true"></i> Amazon.in</h1>
   </a>
+     <div class="d-none d-sm-block d-md-none">
+          <form class="search input-group" action="/products/searchProd" method="POST">
+            <input type="text" class="form-control" name="searchProd" id="search"
+              placeholder="Search Products.." style="width: 260px;">
+            <div class="input-group-append" style="left:-30px; top:5px; height:30px">
+              <button id="searchbtn" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </form>
+          </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
 
@@ -209,7 +242,8 @@ a.btn.btnsty {
         <a class="nav-link" href="/products">Products</a>
       </li>
       <li class="nav-item active btn p-0 pl-2 pr-2">
-        <a class="nav-link" href="/cart">Cart <i class="fa fa-shopping-cart pr-1" aria-hidden="true"></i><span class="badge badge-success" id="cartCount">{{#if user}}{{cartCount}}{{/if}}</span></a>
+        <a class="nav-link" href="/cart">Cart <i class="fa fa-shopping-cart pr-1" aria-hidden="true"></i><span
+            class="badge badge-success" id="cartCount">{{#if user}}{{cartCount}}{{/if}}</span></a>
       </li>
       {{#if user}}
       <li class="nav-item active btn p-0 pl-2 pr-2">
@@ -219,22 +253,36 @@ a.btn.btnsty {
         <a class="nav-link" href="/wishList"><i class="fa fa-heart pr-1"></i></a>
       </li>
       {{/if}}
+
     </ul>
     {{#if user}}
     <ul class="navbar-nav ml-auto">
+      <li class="search nav-item active  p-0 pl-2 pr-2 " style="">
+        <div class="d-none d-md-block">
+        <form class="input-group" action="/products/searchProd" method="POST">
+          <input type="text" class="form-control" name="searchProd" id="search" placeholder="Search Products.."
+            style="width: 180px;">
+          <div class="input-group-append" style="position:absolute;left:155px;top:6px; ">
+            <button id="searchbtn" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </form>
+        </div>
+      </li>
       <li class="nav-item active btn btn-danger  p-0">
         <div class="dropdown text-light bg-danger">
-          <button id="user" class="btn btn-danger dropdown-toggle nav-link p-2 m-auto"  type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="m-auto" style="width:1.5rem; height:1.5rem; border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
-                {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap"> {{user.firstname}}
+          <button id="user" class="btn btn-danger dropdown-toggle nav-link p-2 m-0" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="m-auto" style="width:1.5rem; height:1.5rem; border-radius:50%" {{#if user.dp}}
+              src="/userImages/{{user.dp}}.png" {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap">
+            {{user.firstname}}
           </button>
           <div class="dropdown-menu dropdown-menu-right p-0 m-0" aria-labelledby="dropdownMenuButton">
             <div class="card  dropdown-item m-auto" style="padding:0rem; width:15rem; height:auto;">
 
-              <img class="card-img dropdown-item m-auto"
-                style="border-radius:50%" {{#if user.dp}} src="/userImages/{{user.dp}}.png"
-                {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap">
+              <img class="card-img dropdown-item m-auto" style="border-radius:50%" {{#if user.dp}}
+                src="/userImages/{{user.dp}}.png" {{else}}src="/userImages/defaultdp.jpg" {{/if}}alt="Card image cap">
               <div class="card-body dropdown-item text-center" style=" height:7rem">
                 <h5 class="card-title dropdown-item text-center">{{user.firstname}} {{user.lastname}}
                 </h5>
@@ -250,16 +298,39 @@ a.btn.btnsty {
     </ul>
 
     {{else}}
-    <!div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
       <ul class="navbar-nav ml-auto my-auto text-white bg-danger">
-        <li class="nav-item active">
+        <li class="nav-item active search p-0 pl-2 pr-2 m-auto" style="">
+          <div class="d-none d-md-block ">
+          <form class="input-group" action="/products/searchProd" method="POST">
+            <input type="text" class="form-control" name="searchProd" id="search"
+              placeholder="Search Products.." style="width: 180px;">
+            <div class="input-group-append" style="position:absolute; left:152px; top:6px">
+              <button id="searchbtn" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </form>
+          </div>
+        </li>
+        <li class="nav-item active mr-2">
           <a class="nav-link" href="/login">Log in <i class="fa fa-sign-in" aria-hidden="true"></i></a>
         </li>
-        <li class="nav-item active">
-          <a id="signup" class="nav-link" href="/login/register">Create an account <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+        <li class="nav-item active mr-1">
+          <a id="signup" class="nav-link" href="/login/register">Create an account <i class="fa fa-user-plus"
+              aria-hidden="true"></i></a>
         </li>
       </ul>
-    <!/div>
-    {{/if}}
+        {{/if}}
   </div>
 </nav>
+<div class="d-block d-sm-none m-1 p-1">
+    <form class="search input-group" action="/products/searchProd" method="POST">
+      <input type="text" class="form-control" name="searchProd" id="search" placeholder="Search Products.."
+        style="width: 180px;">
+      <div class="input-group-apend" style="left:-30px;top:5px; height:30px">
+        <button id="searchbtn" class="" type="submit">
+          <i class="fa fa-search "></i>
+      </div>
+    </form>
+  </div>

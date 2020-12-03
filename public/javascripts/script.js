@@ -9,13 +9,25 @@ function addToCart(proId) {
                 let count = $('#cartCount').html()
                 count = parseInt(count) + 1
                 $('#cartCount').html(count)
+                var confirmBox = $("#container"); 
+                let msg="Product is Added to cart."
+                /* Trace message to display */
+                confirmBox.find(".message").text(msg); 
+                /* Calling function */
+                confirmBox.find(".yes").unbind().click(function()  
+                {confirmBox.hide();}); 
+                confirmBox.find(".yes").click(); 
+                confirmBox.show(); 
             }
+            error:(XMLHttpRequest, textStatus, errorThrown)=> { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }   
         }
     })
 }
 function changeQuantity(cartId, proId, pcount) {
     let x = document.getElementById(proId)
-    let quantity = parseInt(x.querySelector("span.prodCount").innerHTML);
+    let quantity = parseInt(x.querySelector("input.prodCount").value);
     let count = parseInt(pcount);
     $.ajax({
 
@@ -34,7 +46,7 @@ function changeQuantity(cartId, proId, pcount) {
                 location.reload();
             } else {
 
-                x.querySelector("span.prodCount").innerHTML = parseInt(quantity + count);
+                x.querySelector("input.prodCount").value = parseInt(quantity + count);
                 document.getElementById("total").innerHTML = response.total;
                 $(x.querySelector("td.price").innerHTML).load(window.location + x.querySelector(" td.price"))
             }

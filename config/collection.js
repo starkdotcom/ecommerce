@@ -3,5 +3,6 @@ module.exports={
     USER_COLLECTION:'user',
     CART_COLLECTION:'cart',
     ORDER_COLLECTION:'order',
-    WISHLIST_COLLECTION:'wishlist'
+    WISHLIST_COLLECTION:'wishlist',
+    ADDRESS_COLLECTION:'address'
 }

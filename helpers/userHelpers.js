@@ -55,17 +55,22 @@ module.exports = {
         })
     },
     addToWishList:(proId,userId)=>{
-        proObj = {
-            item: ObjectID(proId),
-        }
+        proObj= {item:ObjectID(proId)}
         return new Promise(async (resolve, reject) => {
             var wishList = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: ObjectID(userId) });
             if (wishList) {
                 let proExist = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: ObjectID(userId) ,'products.item': ObjectID(proId) })
                 if (proExist) {
-                    db.get().collection(collection.WISHLIST_COLLECTION).removeOne({ user: ObjectID(userId), 'products.item': ObjectID(proId) }).then(() => {
+                    db.get().collection(collection.WISHLIST_COLLECTION).updateOne({ 'user': ObjectID(userId), 'products.item':ObjectID(proId)},
+                    {
+                        $pull: { products: proObj }
+                    }).then(() => {
+                        resolve(false)
+                    })
+                    
+                    /*removeOne({ user: ObjectID(userId), 'products.item': ObjectID(proId) }).then(() => {
                             resolve(false)
-                        })
+                        })*/
                 }
                 else {
                     db.get().collection(collection.WISHLIST_COLLECTION).updateOne({ user: ObjectID(userId) },
@@ -82,11 +87,121 @@ module.exports = {
                     products: [proObj]
                 }
                 db.get().collection(collection.WISHLIST_COLLECTION).insertOne(
-                    wishObj).then(() => {
+                    wishObj).then((response) => {
+                        console.log(response)
                         resolve(true)
                     })
             }
         })
+    },
+    addAddress:(addr,userId)=>{
+        addrObj= addr
+        return new Promise(async (resolve, reject) => {
+            var Address = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ user: ObjectID(userId) });
+            if (Address) {
+                let addrExist = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ user: ObjectID(userId) ,'addresses': [addr]})
+               if (addrExist) {
+                   /* db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ 'user': ObjectID(userId), 'products.item':ObjectID(proId)},
+                    {
+                        $pull: { products: proObj }
+                    }).then(() => {
+                        resolve(false)
+                    })
+                    
+                    /*removeOne({ user: ObjectID(userId), 'products.item': ObjectID(proId) }).then(() => {
+                            resolve(false)
+                        })*/
+                resolve(false)
+                    }
+                else {
+                    db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ user: ObjectID(userId) },
+                        { $push: { addresses:addrObj } }
+                    ).then((response) => {
+                        resolve(true)
+                    })
+                }
+            }
+
+            else {
+               AddrObj = {
+                    user: ObjectID(userId),
+                    addresses: [addrObj]
+                }
+                db.get().collection(collection.ADDRESS_COLLECTION).insertOne(
+                    AddrObj).then((response) => {
+                        console.log(response)
+                        resolve(true)
+                    })
+            }
+        })
+    },
+    getAddress:(userId)=>{
+        return new Promise(async (resolve,reject)=>{
+            await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:ObjectID(userId)}).then((user)=>{
+            if(user){
+            address=user.addresses
+            console.log(address);
+            resolve(address)}
+            })
+            reject()
+        })
+    },
+    getAddr:(userId,index)=>{
+        return new Promise(async(resolve,reject)=>{
+            address = await db.get().collection(collection.ADDRESS_COLLECTION).aggregate([
+              { $match:{user:ObjectID(userId)},},
+              
+               { $project: {
+                    addr: { $arrayElemAt: ['$addresses', parseInt(index)] }
+               } 
+           }
+            ]).toArray()
+            console.log("Fetched" ,address[0].addr);
+            resolve(address[0].addr)
+            reject()    
+        })
+    },
+    updateAddress:(userId,addr,index)=>{
+        return new Promise((resolve,reject)=>{
+            let i=parseInt(index)
+        
+            db.get().collection(collection.ADDRESS_COLLECTION).updateOne(
+                { user: ObjectID(userId)},
+               {$unset:{["addresses."+i]:1}},).then(()=>{
+                console.log("Element Unset");
+                db.get().collection(collection.ADDRESS_COLLECTION).updateOne(
+                    { user: ObjectID(userId)},
+               {$pull:{addresses:null}}).then(()=>{
+                console.log("Element pulled");
+                db.get().collection(collection.ADDRESS_COLLECTION).updateOne(
+                { user: ObjectID(userId)},
+               { $push:{ 
+                   addresses: {$each:[addr],
+                $position:i
+            }}}
+        ).then((response)=>{
+            console.log("Element added");
+            //          console.log(response);
+                resolve(response)
+            })
+            //reject()
+        })})})
+    },
+    removeAddress:(userId,addr,index)=>{
+        return new Promise((resolve,reject)=>{
+            let i=parseInt(index)
+        
+            db.get().collection(collection.ADDRESS_COLLECTION).updateOne(
+                { user: ObjectID(userId)},
+               {$unset:{["addresses."+i]:1}},).then(()=>{
+                console.log("Element Unset");
+                db.get().collection(collection.ADDRESS_COLLECTION).updateOne(
+                    { user: ObjectID(userId)},
+               {$pull:{addresses:null}}).then(()=>{
+                console.log("Element pulled");
+                resolve()
+               })})
+            })
     },
     getUserWishList:(userId)=>{
         return new Promise(async (resolve, reject) => {
@@ -96,7 +211,7 @@ module.exports = {
                     $match: { user: ObjectID(userId) },
                 },
                 {
-                    $unwind: '$products'
+                    $unwind: '$products',
                 },
                 {
                     $project: {

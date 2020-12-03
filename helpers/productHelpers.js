@@ -7,6 +7,7 @@ var userHelpers = require('./userHelpers')
 const strcmp=require('strcmp')
 const { resolve } = require('path');
 const { ObjectId } = require('mongodb');
+const { UnavailableForLegalReasons } = require('http-errors');
 module.exports={
     
 addProducts:(product,callback)=>
@@ -85,23 +86,28 @@ getAllProducts:(userId)=>{
             await userHelpers.checkWishList(userId).then((prod)=>{
                 //console.log(prod);
                 products.forEach(element => {
-                   element.wlist= prod.forEach(ele=>{
-                       console.log("list:",ele);
-                       console.log("Prod:",element._id);
-                       let str1=element._id
-                        return strcmp(str1,ele)/*
-                        console.log("val:",products.element.wlist);
-                        return true;
-                        }*/
-                    })
-                  console.log(element.wlist);
+                    element.wlist=false
+                    prod.forEach(ele=>{
+                      
+                       let str1= ""+element._id
+                       let str2= ""+ele
+                       console.log("list:",str2);
+                       console.log("Prod:",str1);
+                        if(str1==str2){
+                            element.wlist=true
+                        } })
+                        console.log(element.wlist);})
+                       // console.log(products);
+                        resolve (products);
+                }).catch(()=>{
+                    resolve(products)
                 })
-                
+            }
+            resolve(products)
                // products.wlist=products.some(v =>{ prod.includes(v);
-             //   console.log(products)});
-              })/*.catch(products.wlist=false)*/}
-              console.log(products);
-        resolve (products);
+                console.log(products)
+              //})/*.catch(products.wlist=false)*/}
+             
     })
 },
 deleteProduct:(proId)=>{
@@ -120,5 +126,40 @@ deleteProduct:(proId)=>{
         } resolve(response.name)
        })
    }) 
+},
+getSearchProducts:(userId,searchProd)=>{
+    return new Promise(async (resolve,reject)=>{
+        let search=searchProd+""
+        let products=await db.get().collection(collection.PRODUCT_COLLECTION).find({$text:{$search:search,$caseSensitive: false}})/*.sort( { score: { $meta: "textScore" } } )/*[
+            {name: {$regex:".*"+search+".*",'$options':'i'}},
+        {tags:{$regex:".*"+search+".*"}},
+           { description:{$regex:".*"+search+".*"}}
+    ]}}})*/.toArray();
+         if(userId){
+             console.log("user:",userId);
+            await userHelpers.checkWishList(userId).then((prod)=>{
+                //console.log(prod);
+                products.forEach(element => {
+                    element.wlist=false
+                    prod.forEach(ele=>{
+                      
+                       let str1= ""+element._id
+                       let str2= ""+ele
+                       console.log("list:",str2);
+                       console.log("Prod:",str1);
+                        if(str1==str2){
+                            element.wlist=true
+                        } })
+                        console.log(element.wlist);})
+                       // console.log(products);
+                        resolve (products);
+                }).catch(()=>{
+                    resolve(products)
+                })
+            }
+            resolve(products)     
+    })
+
+   
 }
 }

@@ -1,32 +1,263 @@
+<style>
+  .hidden {
+    display: none;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+  }
+
+  /*
+button, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #777;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+button:hover, .button:hover {
+  border-color: #cdd;
+}*/
+  /*
+.share-button, .copy-link {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.share-button, .share-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+*/
+  .share-dialog {
+    display: none;
+    width: 95%;
+    max-width: 500px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .15);
+    z-index: -1;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  .share-dialog.is-open {
+    display: block;
+    z-index: 100;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .targets {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .close-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .close-button svg {
+    margin-right: 0;
+  }
+
+  .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #eee;
+  }
+
+  .pen-url {
+    margin-right: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+/*  added to cart Alert Box*/ 
+  #container { 
+            z-index: 101;
+            display: none; 
+            background-color: rgb(192, 192, 192); 
+            color: rgb(0, 0, 0); 
+            position: absolute; 
+            width: 350px; 
+            border-radius: 5px; 
+            left: 50%; 
+            top:10%;
+            margin-left: -160px; 
+            padding: 16px 8px 8px; 
+            box-sizing: border-box; 
+         } 
+           
+         /* Designing dialog box's okay buttun */
+         #container button { 
+           z-index: 101;
+            background-color: rgb(255, 255, 255); 
+            display: inline-block; 
+            border-radius: 5px; 
+            border: 2px solid rgb(49, 49, 49); 
+            padding: 5px; 
+            text-align: center; 
+            width: 60px; 
+         } 
+           
+         /* Dialog box message decorating */
+         #container .message { 
+           z-index: 101;
+            text-align: left; 
+            padding: 10px 30px; 
+         } 
+</style>
 <div class="row m-3">
-     
+ <div id="container"> 
+         <div class="message"> 
+             Product Added to Cart<br>  
+            </div> 
+         <button class="yes">okay</button> 
+      </div> 
   {{#each products}}
-<h3> S{{this.wlist}}</h3>
   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
 
     <div id="{{this._id}}" class="card " style="max-width:100%;max-height:100%;">
 
       <div class="" style="position:relative">
-        <button onclick="addToWishList('{{this._id}}')"
+        <button {{#if user}}onclick="addToWishList('{{this._id}}')" {{else}}href="/login" {{/if}}
           style="z-index:4;	position:absolute;width:30px;	height:30px;	top:12px;	right:12px;	background-color:rgb(172, 172, 172);border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;color:white">
-          <i class="fa fa-heart p-1 mt-1" aria-hidden="true"></i></button>
-          {{#each listProd}}{{#is ../this.product this }}Red{{/is}}{{/each}}
-         
-        <button onclick="share('{{this._id}}')"
+          <i class="fa fa-heart p-1 mt-1" {{#if this.wlist}}style="color:red" {{/if}} aria-hidden="true"></i></button>
+
+      <div style=" margin-left:12px;margin-top:12px;">
+        <div class="share-dialog" style="position:absolute; ">
+          <header>
+            <h3 class="dialog-title">Share {{this.name}}</h3>
+            <button class="close-button" ><svg>
+                <use href="#close"></use>
+              </svg></button>
+          </header>
+          <div class="targets">
+            <a class="button">
+              <svg>
+                <use href="#facebook"></use>
+              </svg>
+              <span>Facebook</span>
+            </a>
+
+            <a class="button">
+              <svg>
+                <use href="#twitter"></use>
+              </svg>
+              <span>Twitter</span>
+            </a>
+
+            <a class="button">
+              <svg>
+                <use href="#linkedin"></use>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <a class="button">
+              <svg>
+                <use href="#email"></use>
+              </svg>
+              <span>Email</span>
+            </a>
+          </div>
+          <div class="link">
+            <textarea cols="30" rows="1" class="pen-url p-0">http://localhost:3000/product/{{this._id}}</textarea>
+            <button style="width: 100%; border:1px solid #000;" onclick="copyUrl('{{this._id}}')" class="copy-link">Copy Link</button>
+          </div>
+        </div>
+        <button class="share-button" type="button" onclick="shareProd('{{this._id}}')"  
           style="z-index:4;	position:absolute;	width:30px;	height:30px;	top:52px;	right:12px;	background-color:rgb(123, 147, 255);	color:#FFF;	border-radius:50%;	text-align:center;	box-shadow: 2px 2px 3px #999;">
-          <i class="fa fa-share p-1 mt-1" aria-hidden="true"></i></button>
+          <svg class="mx-auto mt-1">
+            <use href="#share-icon"></use>
+          </svg> </button> 
+
+        <svg class="hidden">
+          <defs>
+            <symbol id="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-share">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </symbol>
+
+            <symbol id="facebook" viewBox="0 0 24 24" fill="#3b5998" stroke="#3b5998" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </symbol>
+
+            <symbol id="twitter" viewBox="0 0 24 24" fill="#1da1f2" stroke="#1da1f2" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+              </path>
+            </symbol>
+
+            <symbol id="email" viewBox="0 0 24 24" fill="#777" stroke="#fafafa" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="feather feather-mail">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </symbol>
+
+            <symbol id="linkedin" viewBox="0 0 24 24" fill="#0077B5" stroke="#0077B5" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </symbol>
+
+            <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+            </symbol>
+          </defs>
+        </svg>
+      </div>
         <a href="/product/{{this._id}}" style="z-index:1;text-decoration: none;">
           <img class="card-img" style="padding:10px 25px;  height:14rem;" src="/productImages/{{this._id}}.png"
             alt="Card image cap">
 
-        
-        <div class="card-body pb-0" style=" height:auto;">
-          <h5 class="card-title">{{this.name}}</h5>
-         
-          <p class="card-text">{{this.description}}</p>
-        </div>
+
+          <div class="card-body pb-0" style=" height:auto;">
+            <h5 class="card-title">{{this.name}}</h5>
+
+            <p class="card-text">{{this.description}}</p>
+          </div>
         </a>
-         <div class="card-body pt-0" style=" height:auto;">
+        <div class="card-body pt-0" style=" height:auto;">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Price: {{this.price}}</li>
 
@@ -41,13 +272,53 @@
     </div>
 
   </div>
+
   {{/each}}
 
 </div>
 <script>
-function addToWishList(proId) {
+  function shareProd(prodId){
+   let prod=document.getElementById(prodId)
+  const shareButton = prod.querySelector('.share-button');
+  const shareDialog = prod.querySelector('.share-dialog');
+  const closeButton = prod.querySelector('.close-button');
+
+  shareButton.addEventListener('click', event => {
+    shareDialog.classList.add('is-open');
+  });
+
+  closeButton.addEventListener('click', event => {
+    shareDialog.classList.remove('is-open');
+  });
+  }
+  function copyUrl(prodId){
+    let prod=document.getElementById(prodId)
+  var copyText = prod.querySelector('.pen-url');
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+  }
+  /*
+  function verifyLogin(){
+    $ajax({
+    url:'/login'
+    type:'get',
+  success:(response)=>{
+  if (response){
+
+  }
+  })
+  }*/
+  function addToWishList(proId) {
     let hh = document.getElementById(proId)
-    let h =hh.querySelector('.card div button i.fa.fa-heart')
+    let h = hh.querySelector('.card div button i.fa.fa-heart')
     $.ajax({
       url: "/addToWishList/" + proId,
       type: 'get',
@@ -59,8 +330,31 @@ function addToWishList(proId) {
         else {
           h.style.color = "white";
         }
+     
       }
+    })}
+
+/*function verifyLogin(proId) {
+    let hh = document.getElementById(proId)
+    let h = hh.querySelector('.card div button i.fa.fa-heart')
+    $.ajax({
+        url:"/login",
+        type:'get',
+        success:(response)=>{
+            $.ajax({
+              url: "/addToWishList/" + proId,
+      type: 'get',
+      success: (response) => {
+        console.log(response)
+        if (response.stat) {
+          h.style.color = "red";
+        }
+        else {
+          h.style.color = "white";
+        } 
+        }
+      })}
     })
   }
-
+*/
 </script>
